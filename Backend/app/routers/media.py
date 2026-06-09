@@ -6,7 +6,7 @@ from app.models.media import Media
 from app.dependencies import require_admin
 from app.utils.s3_utils import upload_file_to_s3, rekognition_client, s3_client
 import os
-from app.services.ai_service import generate_tags_from_image # <-- NEW IMPORT
+# from app.services.ai_service import generate_tags_from_image # <-- NEW IMPORT
 
 router = APIRouter(prefix="/api/media", tags=["Media"])
 
@@ -30,7 +30,7 @@ async def upload_media_for_event(
     s3_url = upload_file_to_s3(file_bytes, file.filename, file.content_type)
 
     if media_type == "image":
-        ai_tags = generate_tags_from_image(file_bytes)
+        ai_tags = ["event", "photo"]
 
         extracted_face_ids = []
         try:
