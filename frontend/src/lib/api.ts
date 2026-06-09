@@ -20,9 +20,6 @@ console.log("TOKEN_AFTER_ASSIGN =", token);
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  console.log("TOKEN =", token);
-  console.log("HEADERS =", headers);
-  console.log("ENDPOINT =", endpoint);
 
   const response = await fetch(`${API_URL}${endpoint}`, {
     ...options,
