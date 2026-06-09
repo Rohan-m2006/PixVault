@@ -7,7 +7,7 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
   // 1. Check if the user has a token saved in their browser's Local Storage
   let token = "";
   if (typeof window !== "undefined") {
-    token = localStorage.getItem("token") || "";
+    token = localStorage.getItem("access_token") || "";
   }
 
   // 2. Set up the headers (telling the backend we are sending JSON and our Token)
@@ -19,6 +19,8 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
+  console.log("TOKEN =", token);
+console.log("HEADERS =", headers);
 
   // 3. Make the actual request to the FastAPI backend
   const response = await fetch(`${API_URL}${endpoint}`, {
