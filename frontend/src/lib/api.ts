@@ -6,6 +6,9 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
   let token = "";
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token") || "";
+
+console.log("LOCALSTORAGE_TOKEN =", localStorage.getItem("token"));
+console.log("TOKEN_AFTER_ASSIGN =", token);
   }
 
   const headers: Record<string, string> = {
