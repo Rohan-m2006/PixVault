@@ -12,24 +12,18 @@ from app.routers import notifications
 app = FastAPI(title="Event Media API")
 app.include_router(notifications.router)
 
-# ------------------------------------------------------------------
-# CORS CONFIGURATION
-# ------------------------------------------------------------------
-# Define who is allowed to talk to our API. 
-# We explicitly allow our Next.js frontend running on port 3000.
-origins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://pix-vault-indol.vercel.app",
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,            # Allows requests from your Next.js app
-    allow_credentials=True,           # Allows cookies and authorization headers
-    allow_methods=["*"],              # Allows ALL HTTP methods (GET, POST, OPTIONS, PUT, DELETE)
-    allow_headers=["*"],              # Allows ALL headers (Content-Type, Authorization, etc.)
-)
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://pix-vault-indol.vercel.app",
+    ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)   
 # ------------------------------------------------------------------
 
 # Connect our routers to the app
